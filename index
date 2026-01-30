@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrossEd Global UK Ltd - 连接中英教育与商业精英</title>
+    
+    <style>
+        :root {
+            --background: 0 0% 100%;
+            --foreground: 222.2 84% 4.9%;
+            --card: 0 0% 100%;
+            --card-foreground: 222.2 84% 4.9%;
+            --popover: 0 0% 100%;
+            --popover-foreground: 222.2 84% 4.9%;
+            --primary: 222.2 47.4% 11.2%;
+            --primary-foreground: 210 40% 98%;
+            --secondary: 210 40% 96.1%;
+            --secondary-foreground: 222.2 47.4% 11.2%;
+            --muted: 210 40% 96.1%;
+            --muted-foreground: 215.4 16.3% 46.9%;
+            --accent: 210 40% 96.1%;
+            --accent-foreground: 222.2 47.4% 11.2%;
+            --destructive: 0 84.2% 60.2%;
+            --destructive-foreground: 210 40% 98%;
+            --border: 214.3 31.8% 91.4%;
+            --input: 214.3 31.8% 91.4%;
+            --ring: 222.2 84% 4.9%;
+            --radius: 0.5rem;
+        }
+        
+        body {
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+        }
+        
+        input, textarea, select {
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+            border-color: hsl(var(--input));
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            ring: 2px solid hsl(var(--ring));
+        }
+    </style>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: ["class"],
+            theme: {
+                container: {
+                    center: true,
+                    padding: "2rem",
+                    screens: {
+                        "2xl": "1400px",
+                    },
+                },
+                extend: {
+                    colors: {
+                        border: "hsl(var(--border))",
+                        input: "hsl(var(--input))",
+                        ring: "hsl(var(--ring))",
+                        background: "hsl(var(--background))",
+                        foreground: "hsl(var(--foreground))",
+                        primary: {
+                            DEFAULT: "hsl(var(--primary))",
+                            foreground: "hsl(var(--primary-foreground))",
+                        },
+                        secondary: {
+                            DEFAULT: "hsl(var(--secondary))",
+                            foreground: "hsl(var(--secondary-foreground))",
+                        },
+                        destructive: {
+                            DEFAULT: "hsl(var(--destructive))",
+                            foreground: "hsl(var(--destructive-foreground))",
+                        },
+                        muted: {
+                            DEFAULT: "hsl(var(--muted))",
+                            foreground: "hsl(var(--muted-foreground))",
+                        },
+                        accent: {
+                            DEFAULT: "hsl(var(--accent))",
+                            foreground: "hsl(var(--accent-foreground))",
+                        },
+                        popover: {
+                            DEFAULT: "hsl(var(--popover))",
+                            foreground: "hsl(var(--popover-foreground))",
+                        },
+                        card: {
+                            DEFAULT: "hsl(var(--card))",
+                            foreground: "hsl(var(--card-foreground))",
+                        },
+                    },
+                    borderRadius: {
+                        lg: "var(--radius)",
+                        md: "calc(var(--radius) - 2px)",
+                        sm: "calc(var(--radius) - 4px)",
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+    <div id="root"></div>
+    
+    <script>
+        const { useState, useEffect } = React;
+        const { createRoot } = ReactDOM;
+        
+        // 内容数据
+        const content = {
+            zh: {
+                nav: {
+                    home: "首页",
+                    services: "核心业务",
+                    about: "关于我们",
+                    contact: "联系方式",
+                    cta: "立即咨询"
+                },
+                hero: {
+                    title: "连接中英教育与商业精英的桥梁",
+                    subtitle: "通过沉浸式游学、企业访学及中英高校合作咨询，促进国际文化交流与人才发展。"
+                },
+                services: {
+                    title: "我们的核心服务",
+                    subtitle: "为学生、企业高管及高校提供全方位的国际教育解决方案。",
+                    s1: {
+                        title: "英国游学项目 (冬/夏令营)",
+                        desc: "面向国际学生的综合性短期游学体验。包含语言学习、文化探索、名校参访及寄宿家庭/公寓住宿。",
+                        features: ["纯正语言课程", "牛剑名校参访", "深度文化体验", "全程安全保障"]
+                    },
+                    s2: {
+                        title: "英国精英企业访学",
+                        desc: "为企业高管和企业家定制的英国顶尖企业（金融、科技、创意产业）参访行程，促进管理对话与行业洞察。",
+                        features: ["名企实地参访", "高管面对面", "行业高端论坛", "商务社交晚宴"]
+                    },
+                    s3: {
+                        title: "中英高校合作咨询",
+                        desc: "搭建中英高校合作办学的桥梁。提供从伙伴匹配、协议谈判到课程设计的"一站式"咨询服务。",
+                        features: ["精准伙伴匹配", "合作协议谈判", "课程体系设计", "质量保障支持"]
+                    }
+                },
+                about: {
+                    title: "为什么选择 CrossEd?",
+                    subtitle: "总部位于英国剑桥，拥有深厚的本土资源，为您提供独一无二的教育体验。",
+                    points: [
+                        { title: "资源网络深厚", desc: "拥有广泛的英国本土教育资源（语言学校、私立学校、大学）及企业人脉。" },
+                        { title: "高度定制服务", desc: "拒绝千篇一律，根据客户年龄、专业及兴趣量身定制行程。" },
+                        { title: "专业精英团队", desc: "核心成员拥有中英两地教育及商业背景，具备卓越的项目管理能力。" },
+                        { title: "综合解决方案", desc: "提供从短期游学到长期升学、从学习到商务实践的全链条服务。" }
+                    ]
+                },
+                contact: {
+                    title: "联系我们",
+                    subtitle: "准备好开启您的英国之旅了吗？请填写下方表格联系我们。",
+                    form: {
+                        name: "您的姓名",
+                        email: "电子邮箱",
+                        interest: "感兴趣的项目",
+                        message: "留言内容",
+                        submit: "发送消息",
+                        options: ["学生游学项目", "企业访学定制", "高校合作咨询", "其他"]
+                    },
+                    info: {
+                        address: "英国 剑桥",
+                        email: "fiona.ding@crossedglobaluk.com",
+                        phone: "+44 (0) 1223 000000"
+                    }
+                },
+                footer: {
+                    rights: "© 2025 CrossEd Global UK Ltd. 保留所有权利。",
+                    desc: "您通往英国优质教育与商业资源的桥梁。"
+                }
+            }
+        };
+        
+        // 主应用组件
+        function App() {
+            const t = content.zh;
+            
+            const scrollToSection = (id) => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            };
+            
+            return React.createElement('div', { className: 'font-sans' },
+                // 导航栏
+                React.createElement('nav', { className: 'fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-md' },
+                    React.createElement('div', { className: 'container mx-auto px-6 py-4' },
+                        React.createElement('div', { className: 'flex justify-between items-center' },
+                            React.createElement('div', { className: 'flex items-center space-x-2 cursor-pointer' },
+                                React.createElement('div', { className: 'w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center text-white' },
+                                    React.createElement('span', { className: 'text-xl font-bold' }, 'C')
+                                ),
+                                React.createElement('div', null,
+                                    React.createElement('h1', { className: 'text-xl font-bold text-gray-900' }, 'CrossEd'),
+                                    React.createElement('p', { className: 'text-xs text-blue-800 font-medium tracking-widest' }, 'GLOBAL.UK LTD')
+                                )
+                            ),
+                            React.createElement('div', { className: 'hidden md:flex items-center space-x-8' },
+                                ['home', 'services', 'about', 'contact'].map(item =>
+                                    React.createElement('button', {
+                                        key: item,
+                                        onClick: () => scrollToSection(item === 'home' ? 'hero' : item),
+                                        className: 'text-gray-600 hover:text-blue-900 font-medium transition-colors'
+                                    }, t.nav[item])
+                                ),
+                                React.createElement('button', {
+                                    onClick: () => scrollToSection('contact'),
+                                    className: 'px-4 py-2 bg-blue-900 text-white rounded-md hover:bg-blue-800 transition-colors'
+                                }, t.nav.cta)
+                            )
+                        )
+                    )
+                ),
+                
+                // Hero 部分
+                React.createElement('section', { 
+                    id: 'hero',
+                    className: 'relative min-h-screen flex items-center pt-20 overflow-hidden'
+                },
+                    React.createElement('div', { className: 'absolute inset-0 z-0' },
+                        React.createElement('img', {
+                            src: 'https://images.unsplash.com/photo-1548316135-4c6c03975005?q=80&w=2070&auto=format&fit=crop',
+                            alt: 'Cambridge University',
+                            className: 'w-full h-full object-cover'
+                        }),
+                        React.createElement('div', { className: 'absolute inset-0 bg-blue-950/80' })
+                    ),
+                    React.createElement('div', { className: 'container mx-auto px-6 relative z-10 text-white' },
+                        React.createElement('div', { className: 'max-w-3xl' },
+                            React.createElement('div', { 
+                                className: 'inline-block px-3 py-1 bg-blue-500/30 rounded-full text-blue-100 text-sm mb-6'
+                            }, '总部：英国剑桥'),
+                            React.createElement('h1', { className: 'text-5xl md:text-6xl font-bold mb-6' }, t.hero.title),
+                            React.createElement('p', { className: 'text-xl md:text-2xl text-gray-200 mb-10' }, t.hero.subtitle),
+                            React.createElement('div', { className: 'flex gap-4' },
+                                React.createElement('button', {
+                                    onClick: () => scrollToSection('services'),
+                                    className: 'px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-500'
+                                }, '探索我们的项目'),
+                                React.createElement('button', {
+                                    onClick: () => scrollToSection('contact'),
+                                    className: 'px-6 py-3 border-2 border-white text-white rounded-md hover:bg-white/10'
+                                }, '成为合作伙伴')
+                            )
+                        )
+                    )
+                ),
+                
+                // 服务部分
+                React.createElement('section', { id: 'services', className: 'py-24 bg-white' },
+                    React.createElement('div', { className: 'container mx-auto px-6' },
+                        React.createElement('div', { className: 'text-center mb-16' },
+                            React.createElement('h2', { className: 'text-4xl font-bold text-gray-900 mb-4' }, t.services.title),
+                            React.createElement('div', { className: 'h-1.5 w-24 bg-blue-600 mx-auto mb-6' }),
+                            React.createElement('p', { className: 'text-lg text-gray-600 max-w-2xl mx-auto' }, t.services.subtitle)
+                        ),
+                        React.createElement('div', { className: 'grid md:grid-cols-3 gap-8' },
+                            [t.services.s1, t.services.s2, t.services.s3].map((service, index) =>
+                                React.createElement('div', {
+                                    key: index,
+                                    className: 'bg-gray-50 rounded-2xl p-8 hover:shadow-2xl transition-all'
+                                },
+                                    React.createElement('h3', { className: 'text-2xl font-bold text-gray-900 mb-4' }, service.title),
+                                    React.createElement('p', { className: 'text-gray-600 mb-6' }, service.desc),
+                                    React.createElement('ul', { className: 'space-y-3' },
+                                        service.features.map((feat, i) =>
+                                            React.createElement('li', {
+                                                key: i,
+                                                className: 'flex items-start text-sm text-gray-700'
+                                            },
+                                                React.createElement('span', { className: 'text-green-500 mr-2' }, '✓'),
+                                                React.createElement('span', null, feat)
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                ),
+                
+                // 关于我们部分
+                React.createElement('section', { id: 'about', className: 'py-24 bg-blue-900 text-white' },
+                    React.createElement('div', { className: 'container mx-auto px-6' },
+                        React.createElement('div', { className: 'grid md:grid-cols-2 gap-12 items-center' },
+                            React.createElement('div', null,
+                                React.createElement('h2', { className: 'text-4xl font-bold mb-6' }, t.about.title),
+                                React.createElement('p', { className: 'text-blue-100 text-lg mb-8' }, t.about.subtitle),
+                                React.createElement('div', { className: 'grid sm:grid-cols-2 gap-6' },
+                                    t.about.points.map((point, i) =>
+                                        React.createElement('div', {
+                                            key: i,
+                                            className: 'bg-blue-800/50 p-6 rounded-xl'
+                                        },
+                                            React.createElement('h4', { className: 'font-bold text-lg mb-2' }, point.title),
+                                            React.createElement('p', { className: 'text-sm text-blue-200' }, point.desc)
+                                        )
+                                    )
+                                )
+                            ),
+                            React.createElement('div', null,
+                                React.createElement('img', {
+                                    src: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2070',
+                                    alt: 'Students',
+                                    className: 'rounded-2xl shadow-2xl'
+                                })
+                            )
+                        )
+                    )
+                ),
+                
+                // 联系表单部分
+                React.createElement('section', { id: 'contact', className: 'py-24 bg-gray-50' },
+                    React.createElement('div', { className: 'container mx-auto px-6' },
+                        React.createElement('div', { className: 'bg-white rounded-3xl shadow-xl overflow-hidden' },
+                            React.createElement('div', { className: 'grid md:grid-cols-5' },
+                                // 左侧联系信息
+                                React.createElement('div', { className: 'md:col-span-2 bg-blue-900 text-white p-10' },
+                                    React.createElement('h3', { className: 'text-2xl font-bold mb-2' }, t.contact.title),
+                                    React.createElement('p', { className: 'text-blue-200 mb-8' }, t.contact.subtitle),
+                                    React.createElement('div', { className: 'space-y-6' },
+                                        React.createElement('div', null,
+                                            React.createElement('p', { className: 'font-semibold text-sm text-blue-200' }, 'Address'),
+                                            React.createElement('p', null, t.contact.info.address)
+                                        ),
+                                        React.createElement('div', null,
+                                            React.createElement('p', { className: 'font-semibold text-sm text-blue-200' }, 'Email'),
+                                            React.createElement('p', null, t.contact.info.email)
+                                        ),
+                                        React.createElement('div', null,
+                                            React.createElement('p', { className: 'font-semibold text-sm text-blue-200' }, 'Phone'),
+                                            React.createElement('p', null, t.contact.info.phone)
+                                        )
+                                    )
+                                ),
+                                
+                                // 右侧表单
+                                React.createElement('div', { className: 'md:col-span-3 p-10 md:p-14' },
+                                    React.createElement('form', {
+                                        className: 'space-y-6',
+                                        action: 'https://formspree.io/f/xwvblnob',
+                                        method: 'POST'
+                                    },
+                                        React.createElement('div', { className: 'grid md:grid-cols-2 gap-6' },
+                                            React.createElement('div', null,
+                                                React.createElement('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, t.contact.form.name),
+                                                React.createElement('input', {
+                                                    type: 'text',
+                                                    name: 'name',
+                                                    required: true,
+                                                    className: 'w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none'
+                                                })
+                                            ),
+                                            React.createElement('div', null,
+                                                React.createElement('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, t.contact.form.email),
+                                                React.createElement('input', {
+                                                    type: 'email',
+                                                    name: 'email',
+                                                    required: true,
+                                                    className: 'w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none'
+                                                })
+                                            )
+                                        ),
+                                        React.createElement('div', null,
+                                            React.createElement('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, t.contact.form.interest),
+                                            React.createElement('select', {
+                                                name: 'interest',
+                                                className: 'w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none'
+                                            },
+                                                t.contact.form.options.map((opt, i) =>
+                                                    React.createElement('option', { key: i, value: opt }, opt)
+                                                )
+                                            )
+                                        ),
+                                        React.createElement('div', null,
+                                            React.createElement('label', { className: 'block text-sm font-medium text-gray-700 mb-2' }, t.contact.form.message),
+                                            React.createElement('textarea', {
+                                                rows: 4,
+                                                name: 'message',
+                                                required: true,
+                                                className: 'w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none'
+                                            })
+                                        ),
+                                        React.createElement('button', {
+                                            type: 'submit',
+                                            className: 'w-full px-6 py-3 bg-blue-900 text-white rounded-md hover:bg-blue-800 transition-colors flex items-center justify-center'
+                                        },
+                                            t.contact.form.submit,
+                                            React.createElement('span', { className: 'ml-2' }, '→')
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                ),
+                
+                // 页脚
+                React.createElement('footer', { className: 'bg-gray-900 text-gray-400 py-12' },
+                    React.createElement('div', { className: 'container mx-auto px-6' },
+                        React.createElement('div', { className: 'flex flex-col md:flex-row justify-between items-center' },
+                            React.createElement('div', { className: 'mb-4 md:mb-0' },
+                                React.createElement('div', { className: 'flex items-center space-x-2 mb-2' },
+                                    React.createElement('span', { className: 'text-xl font-bold text-white' }, 'CrossEd')
+                                ),
+                                React.createElement('p', { className: 'text-sm' }, t.footer.desc)
+                            ),
+                            React.createElement('div', { className: 'text-sm' }, t.footer.rights)
+                        )
+                    )
+                )
+            );
+        }
+        
+        // 渲染应用
+        const root = createRoot(document.getElementById('root'));
+        root.render(React.createElement(App));
+    </script>
+</body>
+</html>
