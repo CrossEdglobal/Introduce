@@ -7,30 +7,81 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
     <div id="root"></div>
     <script>
-        const { useState, useEffect } = React;
+        const { useState } = React;
         const { createRoot } = ReactDOM;
 
         const content = {
             zh: {
-                nav: { home: "首页", services: "核心业务", about: "关于我们", contact: "联系方式" },
-                hero: { title: "连接中英教育与商业精英的桥梁", subtitle: "通过沉浸式游学、企业访学、高校合作及AI智慧养老，促进多元文化与科技交流。" },
-                s1: { t: "英国游学项目", d: "面向学生的综合性游学体验，包含语言学习、文化探索及名校参访。" },
-                s2: { t: "英国精英企业访学", d: "为企业高管定制的顶尖企业参访行程，促进管理对话与行业洞察。" },
-                s3: { t: "中英高校合作咨询", d: "搭建中英高校合作办学的桥梁，提供全方位的一站式咨询服务。" },
-                s4: { t: "拾光 (Shining Time)", d: "融合AI技术，打造“零门槛、高温度、强守护”的银发数字生态。" },
-                contact: { title: "联系我们", email: "info@crossedglobal.co.uk", phone: "+44 7925 123456", btn: "发送咨询" }
+                nav: { home: "首页", services: "服务详情", about: "关于我们", contact: "联系方式" },
+                hero: { title: "连接中英教育与商业精英的桥梁", subtitle: "深耕英国本土资源，通过专业咨询与前沿技术，赋能全球视野下的个人与企业成长。" },
+                about: {
+                    title: "关于 CrossEd Global",
+                    p1: "CrossEd Global UK Ltd 总部位于英国，是一家致力于打破文化壁垒、促进中英深度交流的专业咨询机构。",
+                    p2: "我们拥有深厚的英国教育背景与本土商业资源。我们的使命是：通过资源精准对接，为学生提供改变人生的学习体验，为企业提供具有前瞻性的行业洞察，并利用人工智能技术关怀社会。我们的核心价值观是“专业、创新、温度、连接”。"
+                },
+                services: {
+                    title: "服务详情",
+                    s1: { 
+                        t: "英国游学项目", 
+                        d: "面向学生的综合性游学体验。",
+                        details: ["名校参访：牛津、剑桥等顶尖学府深度导览", "学术沉浸：短期语言课程与特色工作坊", "文化体验：英国历史遗迹与当地社区互动"]
+                    },
+                    s2: { 
+                        t: "英国精英企业访学", 
+                        d: "为企业高管定制的行业深耕行程。",
+                        details: ["企业参访：走进金融城及科技独角兽企业", "闭门研讨：与英国行业领袖直接交流管理经验", "商务对接：协助寻找潜在的跨境合作伙伴"]
+                    },
+                    s3: { 
+                        t: "中英高校合作咨询", 
+                        d: "一站式国际教育合作解决方案。",
+                        details: ["项目撮合：协助中英高校建立联合办学项目", "学术交流：组织学者访问与国际学术研讨会", "招生咨询：为合作项目提供市场分析与支持"]
+                    },
+                    s4: { 
+                        t: "拾光 (Shining Time)", 
+                        d: "AI 驱动的智慧养老数字生态。",
+                        details: ["零门槛交互：专为老年人设计的 AI 语音助手", "情感陪伴：通过技术缓解银发群体的孤独感", "安全守护：实时健康监测与紧急联络机制"]
+                    }
+                },
+                contact: { title: "联系我们", email: "info@crossedglobal.co.uk", phone: "+44 7925 123456", btn: "提交咨询" }
             },
             en: {
-                nav: { home: "Home", services: "Services", about: "About", contact: "Contact" },
-                hero: { title: "Bridging Education & Business Between China and the UK", subtitle: "Immersive study tours, executive visits, university partnerships, and AI-driven elder care solutions." },
-                s1: { t: "UK Study Tours", d: "Comprehensive programs for students including language courses and university visits." },
-                s2: { t: "Executive Business Visits", d: "Customized visits to UK top enterprises for management dialogues." },
-                s3: { t: "University Partnership", d: "Building bridges and providing consultancy between Chinese and UK universities." },
-                s4: { t: "Shining Time", d: "Leveraging AI technology to create a zero-barrier, warm, and secure digital ecosystem for seniors." },
+                nav: { home: "Home", services: "Services", about: "About Us", contact: "Contact" },
+                hero: { title: "Bridging Education & Business Between China and the UK", subtitle: "Leveraging local UK resources and AI technology to empower individuals and enterprises with a global vision." },
+                about: {
+                    title: "About CrossEd Global",
+                    p1: "Headquartered in the UK, CrossEd Global UK Ltd is a professional consultancy dedicated to breaking cultural barriers and fostering deep exchanges between China and the UK.",
+                    p2: "With a strong background in UK education and business, our mission is to provide life-changing learning experiences for students, forward-looking insights for enterprises, and social care through AI. Our values are Professionalism, Innovation, Warmth, and Connection."
+                },
+                services: {
+                    title: "Service Details",
+                    s1: { 
+                        t: "UK Study Tours", 
+                        d: "Comprehensive student programs.",
+                        details: ["Campus Visits: Guided tours of Oxford, Cambridge, and more", "Academic Immersion: Language courses & workshops", "Culture: Historical sites & community interaction"]
+                    },
+                    s2: { 
+                        t: "Executive Business Visits", 
+                        d: "Customized industry tours for executives.",
+                        details: ["Corporate Visits: Access to City of London & tech unicorns", "Closed-door Seminars: Dialogue with UK industry leaders", "Networking: Sourcing cross-border partners"]
+                    },
+                    s3: { 
+                        t: "University Partnership", 
+                        d: "Consultancy for international education.",
+                        details: ["Project Matchmaking: Joint degree programs facilitation", "Academic Exchange: Scholar visits & conferences", "Market Support: Analysis for partnership programs"]
+                    },
+                    s4: { 
+                        t: "Shining Time", 
+                        d: "AI-driven ecosystem for seniors.",
+                        details: ["Zero-barrier Interaction: Voice-controlled AI for seniors", "Companionship: Technology to reduce loneliness", "Security: Health monitoring & emergency alerts"]
+                    }
+                },
                 contact: { title: "Contact Us", email: "info@crossedglobal.co.uk", phone: "+44 7925 123456", btn: "Send Inquiry" }
             }
         };
@@ -53,54 +104,102 @@
             };
 
             return React.createElement('div', { className: 'min-h-screen' },
-                // Header (加入图片的位置)
-                React.createElement('nav', { className: 'fixed top-0 w-full bg-white/90 backdrop-blur shadow-sm z-50 p-4' },
+                // Header
+                React.createElement('nav', { className: 'fixed top-0 w-full bg-white/90 backdrop-blur shadow-sm z-50 p-4 border-b' },
                     React.createElement('div', { className: 'container mx-auto flex justify-between items-center' },
                         React.createElement('div', { className: 'flex items-center space-x-2' },
-                            // 这里调用你的四叶草图片
                             React.createElement('img', { 
                                 src: '四叶草图片.jpg', 
                                 alt: 'Logo', 
-                                className: 'w-8 h-8 object-contain' // 设置图片大小为 8x8 (约32px)
+                                className: 'w-8 h-8 object-contain',
+                                onError: (e) => { e.target.src = 'https://via.placeholder.com/32?text=C'; }
                             }),
-                            React.createElement('span', { className: 'text-2xl font-bold text-blue-900' }, 'CrossEd')
+                            React.createElement('span', { className: 'text-2xl font-bold text-blue-900 tracking-tight' }, 'CrossEd')
                         ),
-                        React.createElement('button', { onClick: () => setLang(lang === 'zh' ? 'en' : 'zh'), className: 'text-sm font-medium border px-2 py-1 rounded hover:bg-gray-50' }, lang === 'zh' ? 'English' : '中文')
+                        React.createElement('div', { className: 'hidden md:flex space-x-6 text-sm font-medium' },
+                            ['home', 'about', 'services', 'contact'].map(item => 
+                                React.createElement('a', { key: item, href: `#${item}`, className: 'hover:text-blue-600' }, t.nav[item])
+                            )
+                        ),
+                        React.createElement('button', { onClick: () => setLang(lang === 'zh' ? 'en' : 'zh'), className: 'text-xs font-bold border-2 border-blue-900 px-3 py-1 rounded-full hover:bg-blue-900 hover:text-white transition' }, lang === 'zh' ? 'EN' : '中文')
                     )
                 ),
+
                 // Hero
-                React.createElement('section', { className: 'pt-32 pb-20 bg-gradient-to-b from-blue-50 to-white text-center px-6' },
-                    React.createElement('h1', { className: 'text-4xl md:text-5xl font-bold text-gray-900 mb-6' }, t.hero.title),
-                    React.createElement('p', { className: 'text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed' }, t.hero.subtitle)
-                ),
-                // Services
-                React.createElement('section', { className: 'py-20 container mx-auto px-6' },
-                    React.createElement('div', { className: 'grid md:grid-cols-2 lg:grid-cols-4 gap-6' },
-                        ['s1', 's2', 's3', 's4'].map(key => React.createElement('div', { key, className: 'p-8 bg-white border border-blue-100 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300' },
-                            React.createElement('div', { className: 'w-10 h-10 bg-blue-100 rounded-lg mb-4 flex items-center justify-center text-blue-900 font-bold' }, key === 's4' ? 'AI' : key.slice(1)),
-                            React.createElement('h3', { className: 'text-xl font-bold text-blue-900 mb-4' }, t[key].t),
-                            React.createElement('p', { className: 'text-gray-600 text-sm leading-relaxed' }, t[key].d)
-                        ))
+                React.createElement('section', { id: 'home', className: 'pt-40 pb-24 bg-gradient-to-br from-blue-50 via-white to-blue-50 text-center px-6' },
+                    React.createElement('div', { className: 'max-w-4xl mx-auto' },
+                        React.createElement('h1', { className: 'text-4xl md:text-6xl font-extrabold text-blue-950 mb-8 leading-tight' }, t.hero.title),
+                        React.createElement('p', { className: 'text-xl text-gray-600 mb-10 leading-relaxed' }, t.hero.subtitle),
+                        React.createElement('a', { href: '#contact', className: 'bg-blue-600 text-white px-8 py-3 rounded-full font-bold hover:shadow-lg transition' }, t.nav.contact)
                     )
                 ),
-                // Contact
-                React.createElement('section', { className: 'py-20 bg-blue-900 text-white' },
-                    React.createElement('div', { className: 'container mx-auto px-6 max-w-4xl grid md:grid-cols-2 gap-12' },
-                        React.createElement('div', null,
-                            React.createElement('h2', { className: 'text-3xl font-bold mb-6' }, t.contact.title),
-                            React.createElement('p', { className: 'mb-4 opacity-80' }, 'Email: ' + t.contact.email),
-                            React.createElement('p', { className: 'opacity-80' }, 'Phone: ' + t.contact.phone)
-                        ),
-                        React.createElement('form', { onSubmit: handleSubmit, className: 'space-y-4 text-gray-900' },
-                            React.createElement('input', { name: 'name', placeholder: 'Name', required: true, className: 'w-full p-3 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none' }),
-                            React.createElement('input', { name: 'email', type: 'email', placeholder: 'Email', required: true, className: 'w-full p-3 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none' }),
-                            React.createElement('textarea', { name: 'message', placeholder: 'Message', required: true, className: 'w-full p-3 rounded-lg h-32 focus:ring-2 focus:ring-blue-400 outline-none' }),
-                            React.createElement('button', { type: 'submit', className: 'w-full bg-blue-500 text-white py-3 rounded-lg font-bold hover:bg-blue-400 transition' }, t.contact.btn)
+
+                // About Us Section
+                React.createElement('section', { id: 'about', className: 'py-24 bg-white px-6' },
+                    React.createElement('div', { className: 'container mx-auto max-w-4xl text-center' },
+                        React.createElement('h2', { className: 'text-3xl font-bold mb-12 text-blue-900' }, t.about.title),
+                        React.createElement('div', { className: 'grid gap-8 text-left text-gray-700 leading-loose' },
+                            React.createElement('p', { className: 'text-lg italic' }, t.about.p1),
+                            React.createElement('p', null, t.about.p2)
                         )
                     )
                 ),
+
+                // Services Detail Section
+                React.createElement('section', { id: 'services', className: 'py-24 bg-gray-50 px-6' },
+                    React.createElement('div', { className: 'container mx-auto' },
+                        React.createElement('h2', { className: 'text-3xl font-bold text-center mb-16 text-blue-900' }, t.services.title),
+                        React.createElement('div', { className: 'grid lg:grid-cols-2 gap-12' },
+                            ['s1', 's2', 's3', 's4'].map(key => React.createElement('div', { key, className: 'bg-white p-10 rounded-3xl shadow-sm border border-gray-100 hover:border-blue-200 transition' },
+                                React.createElement('div', { className: 'flex items-center space-x-4 mb-6' },
+                                    React.createElement('div', { className: 'w-12 h-12 bg-blue-900 text-white rounded-xl flex items-center justify-center font-bold text-xl' }, key === 's4' ? 'AI' : key.slice(1)),
+                                    React.createElement('h3', { className: 'text-2xl font-bold text-blue-900' }, t.services[key].t)
+                                ),
+                                React.createElement('p', { className: 'text-gray-600 mb-6 font-medium' }, t.services[key].d),
+                                React.createElement('ul', { className: 'space-y-3' },
+                                    t.services[key].details.map((detail, idx) => 
+                                        React.createElement('li', { key: idx, className: 'flex items-start text-sm text-gray-500' },
+                                            React.createElement('span', { className: 'text-blue-500 mr-2' }, '✓'),
+                                            detail
+                                        )
+                                    )
+                                )
+                            ))
+                        )
+                    )
+                ),
+
+                // Contact Section
+                React.createElement('section', { id: 'contact', className: 'py-24 bg-blue-950 text-white' },
+                    React.createElement('div', { className: 'container mx-auto px-6 max-w-5xl' },
+                        React.createElement('div', { className: 'grid md:grid-cols-2 gap-16' },
+                            React.createElement('div', null,
+                                React.createElement('h2', { className: 'text-4xl font-bold mb-8' }, t.contact.title),
+                                React.createElement('div', { className: 'space-y-6 opacity-90' },
+                                    React.createElement('div', null, 
+                                        React.createElement('p', { className: 'text-sm uppercase tracking-widest text-blue-400 font-bold' }, 'Email'),
+                                        React.createElement('p', { className: 'text-xl' }, t.contact.email)
+                                    ),
+                                    React.createElement('div', null, 
+                                        React.createElement('p', { className: 'text-sm uppercase tracking-widest text-blue-400 font-bold' }, 'Phone'),
+                                        React.createElement('p', { className: 'text-xl' }, t.contact.phone)
+                                    )
+                                )
+                            ),
+                            React.createElement('form', { onSubmit: handleSubmit, className: 'bg-white p-8 rounded-2xl text-gray-900 space-y-4' },
+                                React.createElement('input', { name: 'name', placeholder: '姓名 / Name', required: true, className: 'w-full p-4 rounded-xl bg-gray-50 border focus:ring-2 focus:ring-blue-400 outline-none transition' }),
+                                React.createElement('input', { name: 'email', type: 'email', placeholder: '邮箱 / Email', required: true, className: 'w-full p-4 rounded-xl bg-gray-50 border focus:ring-2 focus:ring-blue-400 outline-none transition' }),
+                                React.createElement('textarea', { name: 'message', placeholder: '留言 / Message', required: true, className: 'w-full p-4 rounded-xl bg-gray-50 border h-32 focus:ring-2 focus:ring-blue-400 outline-none transition' }),
+                                React.createElement('button', { type: 'submit', className: 'w-full bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-500 shadow-lg transition' }, t.contact.btn)
+                            )
+                        )
+                    )
+                ),
+
                 // Footer
-                React.createElement('footer', { className: 'py-10 text-center text-gray-400 text-sm' }, '© 2024 CrossEd Global UK Ltd.')
+                React.createElement('footer', { className: 'py-12 text-center text-gray-400 text-xs border-t bg-white' }, 
+                    '© 2026 CrossEd Global UK Ltd. Registered in England & Wales. All Rights Reserved.'
+                )
             );
         }
 
